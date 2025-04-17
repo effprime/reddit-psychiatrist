@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Reddit Psychiatrist</title>
+	<style>
+		body { font-family: sans-serif; max-width: 700px; margin: 40px auto; }
+		h1 { color: #c0392b; }
+		pre { background: #f4f4f4; padding: 10px; border-radius: 5px; white-space: pre-wrap; }
+	</style>
+</head>
+<body>
+	<h1>🧠 Reddit Psychiatrist</h1>
+
+	<form method="POST">
+		<label for="username">Reddit username:</label>
+		<input type="text" name="username" id="username" value="{{.Username}}" required>
+		<button type="submit">Analyze</button>
+	</form>
+
+	{{if .Error}}
+		<p style="color:red;">⚠️ {{.Error}}</p>
+	{{end}}
+
+	{{if .Summary}}
+		<h2>Personality Summary for u/{{.Username}}</h2>
+		<pre>{{.Summary}}</pre>
+	{{end}}
+
+	{{if .Interests}}
+		<h3>Inferred Interests</h3>
+		<ul>
+			{{range .Interests}}
+				<li>{{.}}</li>
+			{{end}}
+		</ul>
+	{{end}}
+</body>
+</html>
